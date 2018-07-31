@@ -1,5 +1,7 @@
 package com.syf097.chemine.proxy;
 
+import com.syf097.chemine.loader.FluidLoader;
+
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -9,6 +11,7 @@ public class client extends common {
 	    public void preInit(FMLPreInitializationEvent event)
 	    {
 	        super.preInit(event);
+	   	 FluidLoader.registerRenders();
 	    }
 
 	    @Override
