@@ -10,7 +10,7 @@ public class FluidNitrogen extends Fluid{
 	    public static final ResourceLocation flowing = new ResourceLocation(chemine.MODID + ":" + "fluid/nitrogen_flow");
 	public FluidNitrogen() {
 
-		super("Nitrogen", still, flowing);
+		super("nitrogen", still, flowing);
 		   this.setDensity(800);
 	        this.setViscosity(1200);
 	        this.setLuminosity(0);

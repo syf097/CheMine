@@ -1,7 +1,7 @@
 package com.syf097.chemine.loader;
 
 import com.syf097.chemine.recipe.Ic2Recipes;
-
+import com.syf097.chemine.recipe.SeparatorRecipe;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.fluids.Fluid;
@@ -14,5 +14,6 @@ public class RecipeLoader {
 	 public   RecipeLoader(FMLInitializationEvent event)
 	    {
 	  Ic2Recipes.Init();
+	  SeparatorRecipe.init();
 	    }
 }

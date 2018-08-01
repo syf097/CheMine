@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.syf097.chemine.recipe.SeparatorRecipe;
+
 import ic2.api.tile.IWrenchable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -32,8 +34,32 @@ public class TileSeparator extends TileEntity implements  ITickable {
 	protected FluidTank input = new FluidTank(10000);
 	 protected FluidTank outputdown = new FluidTank(10000);
 	 protected FluidTank outputup = new FluidTank(10000);
-     
+	  
+	   public boolean canProcess()
+	     {
+		   SeparatorRecipe recipe =SeparatorRecipe.getRecipe(input.getFluid());
+		   if (input.getFluid()!=null){
+		    	if(input.getFluid().containsFluid(recipe.getInput())) {
+		    		 return true;
+		    	}
+		     }
+		   return false;
+	     }
+	 public FluidStack getInput() {
+		 return input.getFluid();
+	 }
+	 
+	
 	 @Override
+	    public void update()
+	    {
+	        if (!this.world.isRemote)
+	        {
+	           input.drain(10,canProcess() );
+	        }
+	    }
+	    // capability system
+       @Override
 	    public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	    {
 	        if (CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.equals(capability))
@@ -64,7 +90,7 @@ public class TileSeparator extends TileEntity implements  ITickable {
 					public int fill(FluidStack resource, boolean doFill) {
 
 						if (facing != EnumFacing.DOWN && facing != EnumFacing.UP ) {
-							if (resource.getFluid()!= FluidRegistry.WATER) {
+							if (!SeparatorRecipe.isValid(resource)) {
 								return 0;
 							}
 							return input.fill(resource, doFill);
@@ -104,14 +130,7 @@ public class TileSeparator extends TileEntity implements  ITickable {
 	        }
 	        return super.getCapability(capability, facing);
 	    }
-	    @Override
-	    public void update()
-	    {
-	        if (!this.world.isRemote)
-	        {
-	           input.drain(10, true);
-	        }
-	    }
+	  
 	
 	    
 }
