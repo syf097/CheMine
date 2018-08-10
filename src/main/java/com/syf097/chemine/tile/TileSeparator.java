@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -34,7 +35,7 @@ public class TileSeparator extends TileEntity implements  ITickable {
 	protected FluidTank input = new FluidTank(10000);
 	 protected FluidTank outputdown = new FluidTank(10000);
 	 protected FluidTank outputup = new FluidTank(10000);
-	  
+	 protected int processrem = 0; 
 	   public boolean canProcess()
 	     {
 		   SeparatorRecipe recipe =SeparatorRecipe.getRecipe(input.getFluid());
@@ -58,6 +59,33 @@ public class TileSeparator extends TileEntity implements  ITickable {
 	           input.drain(10,canProcess() );
 	        }
 	    }
+	 //nbt method
+	    @Override
+	    public void readFromNBT(NBTTagCompound compound)
+	    {
+	        super.readFromNBT(compound);
+	       input.readFromNBT(compound.getCompoundTag("input"));
+	       outputup.readFromNBT(compound.getCompoundTag("putputup"));
+	       outputdown.readFromNBT(compound.getCompoundTag("outputdown"));
+	        this.processrem = compound.getInteger("processrem");
+	    }
+
+	    @Override
+	    public  NBTTagCompound writeToNBT(NBTTagCompound compound)
+	    {
+	        super.writeToNBT(compound);
+	        compound.setInteger("processrem", this.processrem);
+	        compound.setTag("input", input.writeToNBT(new NBTTagCompound()));
+	        compound.setTag("outputuo", outputup.writeToNBT(new NBTTagCompound()));
+	        compound.setTag("outputdowwn", outputdown.writeToNBT(new NBTTagCompound()));
+	        return compound;
+	    }
+	   @Override
+	    public void onChunkUnload()
+	    {
+		   markDirty();
+	    }
+
 	    // capability system
        @Override
 	    public boolean hasCapability(Capability<?> capability, EnumFacing facing)
