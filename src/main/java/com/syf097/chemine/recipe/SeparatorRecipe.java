@@ -33,8 +33,15 @@ private static Set<String> validationFluids = new ObjectOpenHashSet<>();
 		return fluid != null && validationFluids.contains(fluid.getFluid().getName());
 		
 	}
+	
 	public FluidStack getInput() {
 		return input;
+	}
+	public FluidStack getOutputup() {
+		return outputup;
+	}
+	public FluidStack getOutputdown() {
+		return outputdown;
 	}
 	public static SeparatorRecipe getRecipe(FluidStack input) {
 		if(isValid(input)) {
@@ -44,7 +51,7 @@ private static Set<String> validationFluids = new ObjectOpenHashSet<>();
 	}
 	//initialize
 	public static void init(){
-		addRecipe(FluidRegistry.getFluidStack("coalgas", 1000),FluidRegistry.getFluidStack("hydrogen", 500),FluidRegistry.getFluidStack("nitrogen", 500));
+		addRecipe(FluidRegistry.getFluidStack("coalgas", 1000),FluidRegistry.getFluidStack("ic2hydrogen", 500),FluidRegistry.getFluidStack("nitrogen", 500));
 	}
 }
 

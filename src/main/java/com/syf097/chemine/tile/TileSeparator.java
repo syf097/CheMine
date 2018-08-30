@@ -35,28 +35,51 @@ public class TileSeparator extends TileEntity implements  ITickable {
 	protected FluidTank input = new FluidTank(10000);
 	 protected FluidTank outputdown = new FluidTank(10000);
 	 protected FluidTank outputup = new FluidTank(10000);
-	 protected int processrem = 0; 
+	 protected int processrem = 100; 
 	   public boolean canProcess()
 	     {
 		   SeparatorRecipe recipe =SeparatorRecipe.getRecipe(input.getFluid());
 		   if (input.getFluid()!=null){
 		    	if(input.getFluid().containsFluid(recipe.getInput())) {
-		    		 return true;
+		     		if((recipe.getOutputup().isFluidEqual(outputup.getFluid())||outputup.getFluid()==null)&&(recipe.getOutputdown().isFluidEqual(outputdown.getFluid())||outputdown.getFluid()==null)) {
+		    		if(10000-outputup.getFluidAmount()>recipe.getOutputup().amount&&10000-outputdown.getFluidAmount()>recipe.getOutputdown().amount) {
+		    			return true;
+		    		}
+		     		}
 		    	}
 		     }
 		   return false;
 	     }
+	 private void Process() {
+		 SeparatorRecipe recipe =SeparatorRecipe.getRecipe(input.getFluid());
+		 input.drain(recipe.getInput().amount, true);
+		 outputup.fill(recipe.getOutputup(), true);
+		 outputdown.fill(recipe.getOutputdown(),true);
+	 }
 	 public FluidStack getInput() {
 		 return input.getFluid();
 	 }
-	 
+	 public void Transoutput() {
+		 
+	 }
+	 public double getProcess() {
+		 return processrem;
+	 }
 	
 	 @Override
 	    public void update()
 	    {
-	        if (!this.world.isRemote)
-	        {
-	           input.drain(10,canProcess() );
+		
+	        if (!this.world.isRemote&&this.canProcess())
+	        { 
+	        	
+	        	if (processrem <=0){
+	        		 this.Process();
+	        		 processrem = 100;
+	        	}
+	        	else {
+	        	processrem--;	
+	        	}
 	        }
 	    }
 	 //nbt method

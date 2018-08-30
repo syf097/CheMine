@@ -72,8 +72,7 @@ public class BlockOre extends Block {
 		itemBlock.setRegistryName(this.getRegistryName());
 		ForgeRegistries.ITEMS.register(itemBlock);
 
-		ItemStack oreBarium = new ItemStack(this, 1, Type.PYSITE.getMetadata());
-	
+		
 		return true;
 	}
 	@SideOnly (Side.CLIENT)
@@ -94,24 +93,21 @@ public class BlockOre extends Block {
 		private final int metadata;
 		private final String name;
 		private final int light;
-		private final EnumRarity rarity;
+		
 
-		Type(int metadata, String name, int light, EnumRarity rarity) {
+		Type(int metadata, String name, int light) {
 
 			this.metadata = metadata;
 			this.name = name;
 			this.light = light;
-			this.rarity = rarity;
+
 		}
 
-		Type(int metadata, String name, int light) {
-
-			this(metadata, name, light, EnumRarity.COMMON);
-		}
+		
 
 		Type(int metadata, String name) {
 
-			this(metadata, name, 0, EnumRarity.COMMON);
+			this(metadata, name, 0);
 		}
 
 		public int getMetadata() {
@@ -130,10 +126,7 @@ public class BlockOre extends Block {
 			return this.light;
 		}
 
-		public EnumRarity getRarity() {
-
-			return this.rarity;
-		}
+	
 
 		public static Type byMetadata(int metadata) {
 

@@ -1,0 +1,14 @@
+{
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "chemine:items/quantumsaber"
+	},
+"overrides": [
+        {
+            "predicate": {
+                "quantumsaber_active": 1
+            },
+            "model": "chemine:item/quantumsaber_active"
+        }
+    ]
+}

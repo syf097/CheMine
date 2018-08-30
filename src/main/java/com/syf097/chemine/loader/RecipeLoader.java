@@ -1,5 +1,6 @@
 package com.syf097.chemine.loader;
 
+import com.syf097.chemine.recipe.FurnaceRecipe;
 import com.syf097.chemine.recipe.Ic2Recipes;
 import com.syf097.chemine.recipe.SeparatorRecipe;
 
@@ -15,5 +16,6 @@ public class RecipeLoader {
 	    {
 	  Ic2Recipes.Init();
 	  SeparatorRecipe.init();
+	  FurnaceRecipe.Init();
 	    }
 }

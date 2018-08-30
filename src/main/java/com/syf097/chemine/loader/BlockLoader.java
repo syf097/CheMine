@@ -10,14 +10,16 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class BlockLoader {
 		public  static  BlockFluidCoalGas blockfluidcoalgas = new BlockFluidCoalGas();
-	
+		public  static BlockOre blockore = new BlockOre();
+		public  static  BlockMachine blockmachine = new BlockMachine();
 		public BlockLoader(FMLPreInitializationEvent event)
 	    { 	
-	    BlockOre blockore = new BlockOre();
-		BlockMachine blockmachine = new BlockMachine();
+	    
 	 	blockmachine.preinit();	
 		 blockore.preInit(); 
-	    blockore.registerModels();
 	    blockfluidcoalgas.preinti();
 	    }
+		public static void registerModels() {
+			blockore.registerModels();
+		}
 }

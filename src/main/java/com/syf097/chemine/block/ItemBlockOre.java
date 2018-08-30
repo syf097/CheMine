@@ -24,9 +24,9 @@ public class ItemBlockOre extends ItemBlock {
 		return "tile.chemine.ore." + Type.byMetadata(Items.DIAMOND.getDamage(stack)).getName() + ".name";
 	}
 
-	@Override
-	public EnumRarity getRarity(ItemStack stack) {
+	public int getMetadata(int damage)
+    {
+        return damage;
+    }
 
-		return Type.byMetadata(Items.DIAMOND.getDamage(stack)).getRarity();
-	}
 }

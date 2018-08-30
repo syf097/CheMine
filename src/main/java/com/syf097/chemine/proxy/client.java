@@ -1,6 +1,9 @@
 package com.syf097.chemine.proxy;
 
+import com.jcraft.jorbis.Block;
+import com.syf097.chemine.loader.BlockLoader;
 import com.syf097.chemine.loader.FluidLoader;
+import com.syf097.chemine.loader.ItemLoader;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -12,6 +15,8 @@ public class client extends common {
 	    {
 	        super.preInit(event);
 	   	 FluidLoader.registerRenders();
+		    BlockLoader.registerModels();
+		    ItemLoader.render();
 	    }
 
 	    @Override

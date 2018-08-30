@@ -3,7 +3,7 @@ package com.syf097.chemine.block;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.syf097.chemine.block.BlockOre.Type;
+import com.syf097.chemine.block.BlockMachine.Type;
 
 import ic2.api.tile.IWrenchable;
 import net.minecraft.block.Block;
@@ -32,10 +32,10 @@ public class ItemBlockMachine extends ItemBlock   {
 		return "tile.chemine.machine." + Type.byMetadata(Items.DIAMOND.getDamage(stack)).getName() + ".name";
 	}
 
-	@Override
-	public EnumRarity getRarity(ItemStack stack) {
+	public int getMetadata(int damage)
+    {
+        return damage;
+    }
 
-		return Type.byMetadata(Items.DIAMOND.getDamage(stack)).getRarity();
-	}
    
 }
